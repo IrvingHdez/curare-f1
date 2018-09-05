@@ -4,8 +4,18 @@ Extension of [jupyter/base-notebook][1] with Apache Spark. Intended as base imag
 
 [1]: https://github.com/jupyter/docker-stacks/tree/master/base-notebook
 
+### 1. Install Docker Toolbox for your host OS
 
-### Running Jupyter and Spark
+Follow the instructions:
+* On [MacOS][2]
+* On [Windows][3]
+
+[2]: https://docs.docker.com/toolbox/toolbox_install_mac/
+[3]: https://docs.docker.com/toolbox/toolbox_install_windows/
+
+Configure your port settings in VirtualBox
+
+### 2. Running Jupyter and Spark
 
 By default, compose runs jupyter and spark in local mode:
 
