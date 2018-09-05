@@ -1,0 +1,23 @@
+
+version: '3'
+services:
+
+   hub:  
+      build:   .
+      image:   jaeo/spark-jupyter
+      command: jupyterhub -f /jupyterhub_config.py
+      environment:
+         # All containers will join this network
+         DOCKER_NETWORK_NAME: "dockersparkjupyter_default"
+         # JupyterHub will spawn this Notebook image for users
+         DOCKER_NOTEBOOK_IMAGE: "jaeo/spark-jupyter"
+         # Data volume container mount point (absolute path in host)
+         # DATA_VOLUME_CONTAINER: "./data"
+      user: root
+      ports:
+         - 8000:8000
+      volumes:
+         # Required for creating container inside hub
+         - /var/run/docker.sock:/var/run/docker.sock
+         # Hub configuration file 
+         - ./jupyterhub_config.py:/jupyterhub_config.py

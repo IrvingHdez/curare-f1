@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+    jupyter:
+      build:    
+        context: .
+        dockerfile: Dockerfile
+      #image:    jaeo/spark-jupyter 
+      command:  "pyspark --master local[*]"
+      environment:
+         SPARK_PUBLIC_DNS: localhost
+         PYSPARK_DRIVER_PYTHON: start-notebook.sh
+         PYSPARK_DRIVER_PYTHON_OPTS: --NotebookApp.token=''
+      user: root
+      ports:
+         - 8888:8888  # Jupyter 
+         - 4040:4040  # SparkContext default webUI
+      volumes:
+        # Required for creating container inside hub
+         - /c/Users/galle/Spark:/test
+        

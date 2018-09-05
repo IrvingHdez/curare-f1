@@ -1,0 +1,41 @@
+
+version: '3'
+services:
+
+   # docker-compose -f cluster.yml run --rm --service-ports jupyter pyspark --master spark://HOST:PORT
+   # docker-compose -f cluster.yml run --rm --service-ports master
+   # docker-compose -f cluster.yml run --rm --service-ports -e "SPARK_PUBLIC_DNS=WORKER_IP" worker spark-class org.apache.spark.deploy.worker.Worker spark://MASTER_IP:PORT
+
+   jupyter:
+      build:   .
+      image:   jaeo/spark-jupyter
+      command: pyspark --master spark://master:7077
+      environment:
+         SPARK_PUBLIC_DNS: localhost
+         PYSPARK_DRIVER_PYTHON: start-notebook.sh
+         PYSPARK_DRIVER_PYTHON_OPTS: --NotebookApp.token=''
+      ports:
+         - 8888:8888  # Jupyter 
+         - 4040:4040  # SparkContext UI
+
+   master:
+      image:    jaeo/spark-jupyter
+      command:  spark-class org.apache.spark.deploy.master.Master
+      user: root
+      environment:
+         SPARK_PUBLIC_DNS: localhost
+         SPARK_MASTER_OPTS:  "-Dspark.deploy.defaultCores=1"
+      ports:
+         - 7077:7077   # SPARK_MASTER_PORT
+         - 8080:8080   # SPARK_MASTER_WEBUI_PORT
+   
+   worker:
+      image:    jaeo/spark-jupyter
+      command:  spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+      user: root
+      environment:
+         SPARK_PUBLIC_DNS: localhost
+      ports:
+         - 8081:8081   # SPARK_WORKER_PORT
+         - 8881:8881   # SPARK_WORKER_WEBUI_PORT
+ 
