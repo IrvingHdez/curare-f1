@@ -23,6 +23,8 @@ By default, compose runs jupyter and spark in local mode:
 docker-compose up
 ```
 
+### 3. Open notebook in a web browser
+
 Visit [localhost:8888](http://localhost:8888).
 
 Start jupyter and spark in cluster mode
