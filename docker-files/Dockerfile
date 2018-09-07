@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3-minimal
  && rm -rf /var/lib/apt/lists/* 
 
 RUN sudo -H pip install --upgrade pip 
+RUN -m pip install pymongo
 RUN pip install numpy scipy
 RUN python3 -mpip install matplotlib
 RUN pip install ipywidgets
@@ -50,6 +51,7 @@ ENV SPARK_HOME=/usr/spark-${SPARK_VERSION}
 ENV PATH=${PATH}:${SPARK_HOME}/bin \
     PYTHONPATH=${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-${PY4J_VERSION}-src.zip
 
+	
 RUN curl -sL --retry 3 \
   "http://apache.rediris.es/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz" \
   | gunzip \
