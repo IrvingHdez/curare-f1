@@ -13,7 +13,10 @@ Follow the instructions:
 [2]: https://docs.docker.com/toolbox/toolbox_install_mac/
 [3]: https://docs.docker.com/toolbox/toolbox_install_windows/
 
-Configure your port settings in VirtualBox
+NOTE: Configure your port settings in VirtualBox
+* Go to your VM's settings -> Network -> Advanced -> Port forwarding
+* Add new rule |Protocol: TCP|Host Port:8888|Guest Port:8888| --> Local Jupyter notebook server
+* Add new rule |Protocol: TCP|Host Port:4040|Guest Port:4040| --> SparkContext default webUI
 
 ### 2. Running Jupyter and Spark
 
