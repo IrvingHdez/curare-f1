@@ -10,7 +10,7 @@ services:
       environment:
          SPARK_PUBLIC_DNS: localhost
          PYSPARK_DRIVER_PYTHON: start-notebook.sh
-         PYSPARK_DRIVER_PYTHON_OPTS: --NotebookApp.token=''
+         PYSPARK_DRIVER_PYTHON_OPTS: --NotebookApp.token='' --NotebookApp.iopub_data_rate_limit=10000000000 #x         
       user: root
       ports:
          - 8888:8888  # Jupyter 

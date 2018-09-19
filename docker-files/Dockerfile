@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3-minimal
  && rm -rf /var/lib/apt/lists/* 
 
 RUN sudo -H pip install --upgrade pip 
-RUN -m pip install pymongo
+RUN python -m pip install pymongo
+RUN pip install -U jsonpickle
 RUN pip install numpy scipy
 RUN python3 -mpip install matplotlib
 RUN pip install ipywidgets
