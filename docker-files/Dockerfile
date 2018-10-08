@@ -27,6 +27,10 @@ RUN pip install numpy scipy
 RUN python3 -mpip install matplotlib
 RUN pip install ipywidgets
 RUN jupyter nbextension enable --py widgetsnbextension --sys-prefix
+RUN pip install -U textblob
+RUN python -m textblob.download_corpora
+RUN pip install pandas
+RUN pip install plotly
  
 #-------------------------------------------------
 #-- JAVA 
